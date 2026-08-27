@@ -1,0 +1,871 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clothora - Women's Collection</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        /* Navbar */
+
+        nav {
+            background: #111;
+            color: white;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav ul li a:hover {
+            color: #ccc;
+        }
+
+
+        /* Hero */
+
+        .hero {
+            height: 330px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.45),
+                    rgba(0,0,0,0.45)
+                ),
+                url("https://images.unsplash.com/photo-1496747611176-843222e1e57c")
+                center/cover;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+
+        /* Categories */
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            padding: 30px 20px;
+        }
+
+        .category-btn {
+            padding: 10px 22px;
+
+            border: 1px solid #111;
+            background: white;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #111;
+            color: white;
+        }
+
+
+        /* Products Section */
+
+        .products-section {
+            padding: 20px 7% 60px;
+        }
+
+        .products-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .products-heading h2 {
+            font-size: 30px;
+        }
+
+        .products-heading select {
+            padding: 9px 15px;
+
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+        /* Products */
+
+        .products {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* Product Card */
+
+        .product-card {
+            background: white;
+
+            border-radius: 10px;
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+
+        .product-image {
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 280px;
+
+            object-fit: cover;
+        }
+
+
+        .badge {
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            background: #111;
+            color: white;
+
+            padding: 6px 10px;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+        }
+
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            font-size: 19px;
+            margin-bottom: 7px;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        .rating {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+
+        .price {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .old-price {
+            color: #999;
+
+            text-decoration: line-through;
+
+            font-size: 14px;
+
+            margin-left: 5px;
+        }
+
+
+        /* Buttons */
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .cart-btn,
+        .order-btn {
+            flex: 1;
+
+            padding: 11px 5px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+
+        .cart-btn {
+            background: white;
+            color: #111;
+
+            border: 1px solid #111;
+        }
+
+
+        .order-btn {
+            background: #111;
+            color: white;
+
+            border: 1px solid #111;
+        }
+
+
+        .cart-btn:hover {
+            background: #eee;
+        }
+
+        .order-btn:hover {
+            background: #444;
+        }
+
+
+        /* Footer */
+
+        footer {
+            background: #111;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 22px;
+        }
+
+
+        /* Mobile */
+
+        @media(max-width: 650px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .products-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .categories {
+                overflow-x: auto;
+                justify-content: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Navbar -->
+
+    <nav>
+
+        <div class="logo">
+            CLOTHORA
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="mens.html">
+                    Men
+                </a>
+            </li>
+
+            <li>
+                <a href="womens.html">
+                    Women
+                </a>
+            </li>
+
+            <li>
+                <a href="login.html">
+                    Login
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    🛒 Cart
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div>
+
+            <h1>
+                Women's Collection
+            </h1>
+
+            <p>
+                Elegance, confidence and style — all in one place.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Categories -->
+
+    <div class="categories">
+
+        <button class="category-btn active">
+            All
+        </button>
+
+        <button class="category-btn">
+            Dresses
+        </button>
+
+        <button class="category-btn">
+            Tops
+        </button>
+
+        <button class="category-btn">
+            Jeans
+        </button>
+
+        <button class="category-btn">
+            Jackets
+        </button>
+
+    </div>
+
+
+
+    <!-- Products -->
+
+    <section class="products-section">
+
+        <div class="products-heading">
+
+            <h2>
+                Women's Fashion
+            </h2>
+
+            <select>
+
+                <option>
+                    Sort by
+                </option>
+
+                <option>
+                    Price: Low to High
+                </option>
+
+                <option>
+                    Price: High to Low
+                </option>
+
+                <option>
+                    Newest
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="products">
+
+
+            <!-- Product 1 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        NEW
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1496747611176-843222e1e57c"
+                        alt="Floral Dress">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Floral Summer Dress
+                    </h3>
+
+                    <p>
+                        Comfortable & Elegant
+                    </p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹999
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="addCart('Floral Summer Dress')">
+
+                            Add to Cart
+
+                        </button>
+
+                        <button
+                            class="order-btn"
+                            onclick="order('Floral Summer Dress')">
+
+                            Order Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Product 2 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        SALE
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e"
+                        alt="Women's Top">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Casual Women's Top
+                    </h3>
+
+                    <p>
+                        Soft Cotton Fabric
+                    </p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐☆
+                    </div>
+
+                    <div class="price">
+
+                        ₹699
+
+                        <span class="old-price">
+                            ₹899
+                        </span>
+
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="addCart('Casual Womens Top')">
+
+                            Add to Cart
+
+                        </button>
+
+                        <button
+                            class="order-btn"
+                            onclick="order('Casual Womens Top')">
+
+                            Order Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Product 3 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246"
+                        alt="Women's Jeans">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        High Waist Blue Jeans
+                    </h3>
+
+                    <p>
+                        Stretch Denim
+                    </p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹1,199
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="addCart('High Waist Blue Jeans')">
+
+                            Add to Cart
+
+                        </button>
+
+                        <button
+                            class="order-btn"
+                            onclick="order('High Waist Blue Jeans')">
+
+                            Order Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Product 4 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="badge">
+                        NEW
+                    </span>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b"
+                        alt="Women's Jacket">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Stylish Denim Jacket
+                    </h3>
+
+                    <p>
+                        Premium Denim
+                    </p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹1,499
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="addCart('Stylish Denim Jacket')">
+
+                            Add to Cart
+
+                        </button>
+
+                        <button
+                            class="order-btn"
+                            onclick="order('Stylish Denim Jacket')">
+
+                            Order Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Product 5 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b"
+                        alt="Women's Shirt">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Oversized Casual Shirt
+                    </h3>
+
+                    <p>
+                        Relaxed Fit
+                    </p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐☆
+                    </div>
+
+                    <div class="price">
+                        ₹799
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="addCart('Oversized Casual Shirt')">
+
+                            Add to Cart
+
+                        </button>
+
+                        <button
+                            class="order-btn"
+                            onclick="order('Oversized Casual Shirt')">
+
+                            Order Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Product 6 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d"
+                        alt="Women's Fashion">
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Elegant Party Wear
+                    </h3>
+
+                    <p>
+                        Premium Collection
+                    </p>
+
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+
+                    <div class="price">
+                        ₹1,799
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="cart-btn"
+                            onclick="addCart('Elegant Party Wear')">
+
+                            Add to Cart
+
+                        </button>
+
+                        <button
+                            class="order-btn"
+                            onclick="order('Elegant Party Wear')">
+
+                            Order Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Clothora | All Rights Reserved
+        </p>
+
+    </footer>
+
+
+
+    <script>
+
+        function addCart(product) {
+
+            alert(
+                product +
+                " has been added to your cart! 🛒"
+            );
+
+        }
+
+
+        function order(product) {
+
+            alert(
+                "You selected: " +
+                product
+            );
+
+            window.location.href = "order.html";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
+

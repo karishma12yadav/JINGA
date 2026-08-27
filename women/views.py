@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 # Create your views here.
-def order(request):
-    return render(request, 'order.html')
+def women(request):
+    return render(request,'women.html')
